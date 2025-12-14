@@ -79,8 +79,6 @@ public class EmployeeController {
         return Result.success();
     }
 
-
-
     @GetMapping ("/page")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
         log.info("分页查询:{}", employeePageQueryDTO);
@@ -88,7 +86,12 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
 
-
+    @PostMapping("/status/{status}")
+    public Result startOrStop(@PathVariable Integer status, Long id) {
+        log.info("启动禁用员工账号：{},{}", status,id);
+        employeeService.startOrStop(status, id);
+        return Result.success();
+    }
 
 
 }
